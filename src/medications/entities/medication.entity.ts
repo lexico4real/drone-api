@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/base.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Dispatch } from 'src/dispatch/entities/dispatch.entity';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Medication extends BaseEntity {
@@ -17,4 +18,7 @@ export class Medication extends BaseEntity {
 
   @Column()
   image: string;
+
+  @OneToMany(() => Dispatch, (dispatch) => dispatch.medication, { eager: true })
+  dispatch: Dispatch[];
 }
