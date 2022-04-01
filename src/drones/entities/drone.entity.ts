@@ -1,8 +1,9 @@
+import { BaseEntity } from 'src/base.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Model, State } from '../enums';
 
 @Entity()
-export class Drone {
+export class Drone extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   serial_number: string;
 
