@@ -1,34 +1,48 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Medication } from './entities/medication.entity';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { MedicationsService } from './medications.service';
 import { CreateMedicationDto } from './dto/create-medication.dto';
 import { UpdateMedicationDto } from './dto/update-medication.dto';
 
 @Controller('medications')
 export class MedicationsController {
-  constructor(private readonly medicationsService: MedicationsService) {}
+  constructor(private medicationsService: MedicationsService) {}
 
   @Post()
-  create(@Body() createMedicationDto: CreateMedicationDto) {
-    return this.medicationsService.create(createMedicationDto);
+  async createMedication(
+    @Body() createMedicationDto: CreateMedicationDto,
+  ): Promise<Medication> {
+    return this.medicationsService.createMedication(createMedicationDto);
   }
 
   @Get()
-  findAll() {
-    return this.medicationsService.findAll();
+  async getAllMedications(): Promise<Medication[]> {
+    return await this.medicationsService.getAllMedications();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.medicationsService.findOne(+id);
+  @Get('/:id')
+  async getMedicationById(@Param('id') id: string): Promise<Medication> {
+    return await this.medicationsService.getMedicationById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMedicationDto: UpdateMedicationDto) {
-    return this.medicationsService.update(+id, updateMedicationDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateMedicationDto: UpdateMedicationDto,
+  ): Promise<Medication> {
+    return this.medicationsService.updateMedication(id, updateMedicationDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.medicationsService.remove(+id);
+  async deleteMedicationById(@Param('id') id: string): Promise<void> {
+    return await this.medicationsService.deleteMedicationById(id);
   }
 }

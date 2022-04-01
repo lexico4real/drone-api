@@ -1,26 +1,61 @@
-import { Injectable } from '@nestjs/common';
+import { Medication } from './entities/medication.entity';
+import { MedicationRepository } from './repositories/medication.repository';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateMedicationDto } from './dto/create-medication.dto';
 import { UpdateMedicationDto } from './dto/update-medication.dto';
 
 @Injectable()
 export class MedicationsService {
-  create(createMedicationDto: CreateMedicationDto) {
-    return 'This action adds a new medication';
+  constructor(
+    @InjectRepository(MedicationRepository)
+    private medicationRepository: MedicationRepository,
+  ) {}
+  async createMedication(
+    createMedicationDto: CreateMedicationDto,
+  ): Promise<Medication> {
+    return this.medicationRepository.createMedication(createMedicationDto);
   }
 
-  findAll() {
-    return `This action returns all medications`;
+  async getAllMedications(): Promise<Medication[]> {
+    return this.medicationRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} medication`;
+  async getMedicationById(id: string): Promise<Medication> {
+    let found: Medication | PromiseLike<Medication>;
+    try {
+      found = await this.medicationRepository.findOne(id);
+      if (!found) {
+        throw new NotFoundException(`Medication with id ${id} not found`);
+      }
+    } catch (error) {
+      throw new NotFoundException(error.message);
+    }
+
+    return found;
   }
 
-  update(id: number, updateMedicationDto: UpdateMedicationDto) {
-    return `This action updates a #${id} medication`;
+  async updateMedication(
+    id: string,
+    updateMedicationDto: UpdateMedicationDto,
+  ): Promise<Medication> {
+    const found = await this.getMedicationById(id);
+    const { name, weight, code, image } = updateMedicationDto;
+    found.name = name;
+    found.weight = weight;
+    found.code = code;
+    found.image = image;
+    await this.medicationRepository.save(found);
+    return found;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} medication`;
+  async deleteMedicationById(id: string): Promise<void> {
+    const found = await this.getMedicationById(id);
+    const result = await this.medicationRepository.delete(found.id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Medication with id ${id} not found`);
+    } else {
+      return;
+    }
   }
 }

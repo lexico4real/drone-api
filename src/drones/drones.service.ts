@@ -20,7 +20,7 @@ export class DronesService {
   }
 
   async getDroneById(id: string): Promise<Drone> {
-    let found;
+    let found: Drone | PromiseLike<Drone>;
     try {
       found = await this.droneRepository.findOne(id);
       if (!found) {
@@ -48,7 +48,8 @@ export class DronesService {
   }
 
   async deleteDroneById(id: string): Promise<void> {
-    const result = await this.droneRepository.delete(id);
+    const found = await this.getDroneById(id);
+    const result = await this.droneRepository.delete(found.serial_number);
     if (result.affected === 0) {
       throw new NotFoundException(`Drone with serial number ${id} not found`);
     } else {
