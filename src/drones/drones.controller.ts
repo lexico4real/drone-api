@@ -10,33 +10,37 @@ import {
 import { DronesService } from './drones.service';
 import { CreateDroneDto } from './dto/create-drone.dto';
 import { UpdateDroneDto } from './dto/update-drone.dto';
+import { Drone } from './entities/drone.entity';
 
 @Controller('drones')
 export class DronesController {
   constructor(private readonly dronesService: DronesService) {}
 
   @Post()
-  create(@Body() createDroneDto: CreateDroneDto) {
-    return this.dronesService.create(createDroneDto);
+  createDrone(@Body() createDroneDto: CreateDroneDto) {
+    return this.dronesService.createDrone(createDroneDto);
   }
 
   @Get()
-  findAll() {
-    return this.dronesService.findAll();
+  async getAllDrones(): Promise<Drone[]> {
+    return await this.dronesService.getAllDrones();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dronesService.findOne(+id);
+  @Get('/:id')
+  getDroneById(@Param('id') id: string): Promise<Drone> {
+    return this.dronesService.getDroneById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDroneDto: UpdateDroneDto) {
-    return this.dronesService.update(+id, updateDroneDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateDroneDto: UpdateDroneDto,
+  ): Promise<Drone> {
+    return await this.dronesService.updateDrone(id, updateDroneDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.dronesService.remove(+id);
+  @Delete('/:id')
+  async deleteTaskById(@Param('id') id: string): Promise<void> {
+    return await this.dronesService.deleteDroneById(id);
   }
 }
