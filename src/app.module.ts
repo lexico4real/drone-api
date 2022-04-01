@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { DronesModule } from './drones/drones.module';
 import { MedicationsModule } from './medications/medications.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DispatchModule } from './dispatch/dispatch.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    DispatchModule,
   ],
   controllers: [AppController],
   providers: [AppService],
