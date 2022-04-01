@@ -1,5 +1,5 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { IsEnum, Max } from 'class-validator';
+import { IsEnum, Max, Min } from 'class-validator';
 import { Model, State } from '../enums';
 import { CreateDroneDto } from './create-drone.dto';
 
@@ -10,9 +10,11 @@ export class UpdateDroneDto extends PartialType(CreateDroneDto) {
   })
   model: Model;
 
+  @Min(0)
   @Max(100, { message: 'Battery capacity cannot be more than 100%' })
   battery_capacity: number;
 
+  @Min(0)
   @Max(500, { message: 'Weight limit cannot be more than 500kg' })
   weight_limit: number;
 
