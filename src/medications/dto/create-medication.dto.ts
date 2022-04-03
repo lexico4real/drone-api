@@ -13,7 +13,4 @@ export class CreateMedicationDto {
 
   @IsNotEmpty()
   image: string;
-
-  @IsNotEmpty()
-  dispatch: string[];
 }

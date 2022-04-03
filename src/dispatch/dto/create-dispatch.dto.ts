@@ -1,14 +1,17 @@
-import { IsBoolean, IsUUID } from 'class-validator';
+import { CreateMedicationDto } from './../../medications/dto/create-medication.dto';
+import { Drone } from './../../drones/entities/drone.entity';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 
 export class CreateDispatchDto {
+  @IsNotEmpty()
   description: string;
 
   @IsUUID()
-  drone_id: string;
+  drone: Drone;
 
-  @IsUUID()
-  medication: string;
+  @IsNotEmpty()
+  medications: CreateMedicationDto[];
 
-  @IsBoolean()
-  is_completed: boolean;
+  // @IsBoolean()
+  // is_completed: boolean;
 }

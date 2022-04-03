@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Dispatch } from 'src/dispatch/entities/dispatch.entity';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DispatchService } from './dispatch.service';
 import { CreateDispatchDto } from './dto/create-dispatch.dto';
 import { UpdateDispatchDto } from './dto/update-dispatch.dto';
@@ -8,27 +17,32 @@ export class DispatchController {
   constructor(private readonly dispatchService: DispatchService) {}
 
   @Post()
-  create(@Body() createDispatchDto: CreateDispatchDto) {
-    return this.dispatchService.create(createDispatchDto);
+  async createDispatch(
+    @Body() createDispatchDto: CreateDispatchDto,
+  ): Promise<Dispatch> {
+    return await this.dispatchService.createDispatch(createDispatchDto);
   }
 
   @Get()
-  findAll() {
-    return this.dispatchService.findAll();
+  async getAllDispatches() {
+    return await this.dispatchService.getAllDispatches();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dispatchService.findOne(+id);
+  async getDispatchById(@Param('id') id: string) {
+    return await this.dispatchService.getDispatchById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDispatchDto: UpdateDispatchDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateDispatchDto: UpdateDispatchDto,
+  ) {
     return this.dispatchService.update(+id, updateDispatchDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.dispatchService.remove(+id);
+  async deleteDispatch(@Param('id') id: string): Promise<void> {
+    return await this.dispatchService.deleteDispatch(id);
   }
 }

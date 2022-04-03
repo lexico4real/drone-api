@@ -5,7 +5,8 @@ import {
   Column,
   Entity,
   JoinColumn,
-  ManyToOne,
+  JoinTable,
+  ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -20,12 +21,11 @@ export class Dispatch extends BaseEntity {
 
   @OneToOne(() => Drone)
   @JoinColumn()
-  drone_id: Drone;
+  drone: Drone;
 
-  @ManyToOne(() => Medication, (medication) => medication.dispatch, {
-    eager: false,
-  })
-  medication: Medication;
+  @ManyToMany(() => Medication, (medication) => medication.dispatches)
+  @JoinTable()
+  medications: Medication[];
 
   @Column({ default: false })
   is_completed: boolean;
