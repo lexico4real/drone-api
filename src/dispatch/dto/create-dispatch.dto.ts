@@ -15,5 +15,5 @@ export class CreateDispatchDto {
   medicationIds: string[];
 
   // @IsBoolean()
-  // is_completed: boolean;
+  // isCompleted: boolean;
 }

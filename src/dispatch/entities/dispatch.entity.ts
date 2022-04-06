@@ -30,5 +30,5 @@ export class Dispatch extends BaseEntity {
   medications: Medication[];
 
   @Column({ default: false })
-  is_completed: boolean;
+  isCompleted: boolean;
 }

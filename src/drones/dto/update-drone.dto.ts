@@ -12,11 +12,11 @@ export class UpdateDroneDto extends PartialType(CreateDroneDto) {
 
   @Min(0)
   @Max(100, { message: 'Battery capacity cannot be more than 100%' })
-  battery_capacity: number;
+  batteryCapacity: number;
 
   @Min(0)
   @Max(500, { message: 'Weight limit cannot be more than 500kg' })
-  weight_limit: number;
+  weightLimit: number;
 
   @IsEnum(State, {
     message:

@@ -67,8 +67,8 @@ export class DispatchService {
     updateDroneDto: UpdateDroneDto,
   ): Promise<Drone> {
     const found = await this.getDroneById(id);
-    found.battery_capacity = updateDroneDto.battery_capacity;
-    found.weight_limit = updateDroneDto.weight_limit;
+    found.batteryCapacity = updateDroneDto.batteryCapacity;
+    found.weightLimit = updateDroneDto.weightLimit;
     found.state = updateDroneDto.state;
     try {
       await this.droneRepository.save(found);
@@ -83,8 +83,8 @@ export class DispatchService {
     updateDroneDto: UpdateDroneDto,
   ): Promise<Dispatch> {
     const found = await this.getDispatchById(id);
-    found.drone.battery_capacity = updateDroneDto.battery_capacity;
-    found.drone.weight_limit = updateDroneDto.weight_limit;
+    found.drone.batteryCapacity = updateDroneDto.batteryCapacity;
+    found.drone.weightLimit = updateDroneDto.weightLimit;
     found.drone.state = updateDroneDto.state;
     try {
       await this.droneRepository.save(found.drone);
@@ -119,22 +119,22 @@ export class DispatchService {
       dispatch.drone as unknown as string,
     );
 
-    const result = await this.getDroneById(droneObject.serial_number);
+    const result = await this.getDroneById(droneObject.serialNumber);
 
-    if (Number(result.weight_limit) < weightSum) {
+    if (Number(result.weightLimit) < weightSum) {
       throw new NotFoundException(
         `Drone weight ${
-          result.weight_limit
+          result.weightLimit
         } gram is not enough to carry medications: ${medicationName.join(
           ', ',
         )} with weight: ${medicationWeight.join(' gram, ')} gram respectively`,
       );
     }
 
-    if (droneObject.battery_capacity <= 25) {
+    if (droneObject.batteryCapacity <= 25) {
       throw new NotFoundException(
         `Drone battery capacity ${
-          droneObject.battery_capacity
+          droneObject.batteryCapacity
         }% is not enough to carry medications: ${medicationName.join(
           ', ',
         )} with weight: ${medicationWeight.join(' gram, ')} gram respectively`,
@@ -144,8 +144,8 @@ export class DispatchService {
     const updateDoneState = await this.updateDroneState(
       dispatch.drone as unknown as string,
       {
-        battery_capacity: droneObject.battery_capacity,
-        weight_limit: droneObject.weight_limit,
+        batteryCapacity: droneObject.batteryCapacity,
+        weightLimit: droneObject.weightLimit,
         model: droneObject.model,
         state: State.LOADING,
       },

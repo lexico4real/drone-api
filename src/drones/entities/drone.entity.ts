@@ -5,7 +5,7 @@ import { Model, State } from '../enums';
 @Entity()
 export class Drone extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  serial_number: string;
+  serialNumber: string;
 
   @Column()
   model: Model;
@@ -14,8 +14,8 @@ export class Drone extends BaseEntity {
   state: State;
 
   @Column()
-  battery_capacity: number;
+  batteryCapacity: number;
 
   @Column()
-  weight_limit: number;
+  weightLimit: number;
 }

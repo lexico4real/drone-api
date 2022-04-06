@@ -22,7 +22,7 @@ export class MedicationRepository extends Repository<Medication> {
     return await this.find();
   }
   async deleteMedicationById(id: string): Promise<void> {
-    await this.delete(id);
+    await this.softDelete(id);
   }
 
   async getMedicationById(id: string): Promise<Medication> {

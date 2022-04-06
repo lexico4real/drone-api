@@ -5,6 +5,7 @@ import { UpdateDroneDto } from './dto/update-drone.dto';
 import { Drone } from './entities/drone.entity';
 import { DroneRepository } from './repositories/drone.repository';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import fs from 'fs';
 
 @Injectable()
 export class DronesService {
@@ -18,8 +19,20 @@ export class DronesService {
   }
 
   @Cron(CronExpression.EVERY_10_SECONDS)
-  handleCron() {
-    this.logger.log('Cron job executed');
+  async getDroneBatteryStatus(): Promise<any> {
+    const drones = await this.getAllDrones();
+    const batteryStatus = [];
+    for (const drone of drones) {
+      const batteryLevel = drone.batteryCapacity;
+      batteryStatus.push({
+        serialNumber: drone.serialNumber,
+        battery_level: batteryLevel + '%',
+      });
+    }
+
+    return this.logger.log(
+      console.log('Drones battery level\n', batteryStatus),
+    );
   }
 
   async getAllDrones(): Promise<Drone[]> {
@@ -45,18 +58,18 @@ export class DronesService {
     updateDroneDto: UpdateDroneDto,
   ): Promise<Drone> {
     const drone = await this.getDroneById(id);
-    const { model, battery_capacity, state, weight_limit } = updateDroneDto;
+    const { model, batteryCapacity, state, weightLimit } = updateDroneDto;
     drone.model = model;
-    drone.battery_capacity = Number(battery_capacity);
+    drone.batteryCapacity = Number(batteryCapacity);
     drone.state = state;
-    drone.weight_limit = Number(weight_limit);
+    drone.weightLimit = Number(weightLimit);
     await this.droneRepository.save(drone);
     return drone;
   }
 
   async deleteDroneById(id: string): Promise<void> {
     const found = await this.getDroneById(id);
-    const result = await this.droneRepository.delete(found.serial_number);
+    const result = await this.droneRepository.delete(found.serialNumber);
     if (result.affected === 0) {
       throw new NotFoundException(`Drone with serial number ${id} not found`);
     } else {

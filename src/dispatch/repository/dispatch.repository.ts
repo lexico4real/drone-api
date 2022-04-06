@@ -27,12 +27,12 @@ export class DispatchRepository extends Repository<Dispatch> {
   async findByDroneId(droneId: string): Promise<Dispatch[]> {
     return await this.createQueryBuilder('dispatch')
       .innerJoinAndSelect('dispatch.drone', 'drone')
-      .where('drone.serial_number = :droneId', { droneId })
+      .where('drone.serialNumber = :droneId', { droneId })
       .innerJoinAndSelect('dispatch.medications', 'medication')
       .getMany();
   }
 
   async deleteDispatch(id: string): Promise<void> {
-    await this.delete(id);
+    await this.softDelete(id);
   }
 }
