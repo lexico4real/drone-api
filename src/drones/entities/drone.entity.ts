@@ -1,4 +1,4 @@
-import { BaseEntity } from 'src/base.entity';
+import { BaseEntity } from '../../base.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Model, State } from '../enums';
 

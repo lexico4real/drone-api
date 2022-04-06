@@ -12,6 +12,8 @@ export class CreateDispatchDto {
   @IsNotEmpty()
   medications: CreateMedicationDto[];
 
+  medicationIds: string[];
+
   // @IsBoolean()
   // is_completed: boolean;
 }

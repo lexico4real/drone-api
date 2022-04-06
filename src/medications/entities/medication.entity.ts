@@ -1,5 +1,5 @@
-import { BaseEntity } from 'src/base.entity';
-import { Dispatch } from 'src/dispatch/entities/dispatch.entity';
+import { BaseEntity } from '../../base.entity';
+import { Dispatch } from '../../dispatch/entities/dispatch.entity';
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 
 @Entity()

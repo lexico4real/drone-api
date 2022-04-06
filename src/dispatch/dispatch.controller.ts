@@ -1,3 +1,5 @@
+import { UpdateDroneDto } from './../drones/dto/update-drone.dto';
+import { State } from './../drones/enums';
 import { Dispatch } from 'src/dispatch/entities/dispatch.entity';
 import {
   Controller,
@@ -16,6 +18,16 @@ import { UpdateDispatchDto } from './dto/update-dispatch.dto';
 export class DispatchController {
   constructor(private readonly dispatchService: DispatchService) {}
 
+  @Get('/withmedication/:id')
+  async findByMedicationId(@Param('id') id: string): Promise<Dispatch[]> {
+    return await this.dispatchService.findByMedicationId(id);
+  }
+
+  @Get('/withdrone/:id')
+  async findByDroneId(@Param('id') id: string): Promise<Dispatch[]> {
+    return await this.dispatchService.findByDroneId(id);
+  }
+
   @Post()
   async createDispatch(
     @Body() createDispatchDto: CreateDispatchDto,
@@ -33,12 +45,23 @@ export class DispatchController {
     return await this.dispatchService.getDispatchById(id);
   }
 
+  @Patch(':id/dronestate')
+  async updateDroneStateWithDispatchId(
+    @Param('id') id: string,
+    @Body() updateDroneDto: UpdateDroneDto,
+  ): Promise<Dispatch> {
+    return await this.dispatchService.updateDroneStateWithDispatchId(
+      id,
+      updateDroneDto,
+    );
+  }
+
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateDispatchDto: UpdateDispatchDto,
-  ) {
-    return this.dispatchService.update(+id, updateDispatchDto);
+  ): Promise<Dispatch> {
+    return await this.dispatchService.updateDispatch(id, updateDispatchDto);
   }
 
   @Delete(':id')

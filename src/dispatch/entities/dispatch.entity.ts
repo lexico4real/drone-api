@@ -1,5 +1,5 @@
 import { Medication } from './../../medications/entities/medication.entity';
-import { BaseEntity } from 'src/base.entity';
+import { BaseEntity } from '../../base.entity';
 import { Drone } from 'src/drones/entities/drone.entity';
 import {
   Column,
@@ -23,7 +23,9 @@ export class Dispatch extends BaseEntity {
   @JoinColumn()
   drone: Drone;
 
-  @ManyToMany(() => Medication, (medication) => medication.dispatches)
+  @ManyToMany(() => Medication, (medication) => medication.dispatches, {
+    eager: true,
+  })
   @JoinTable()
   medications: Medication[];
 
