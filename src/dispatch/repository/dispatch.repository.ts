@@ -10,6 +10,7 @@ export class DispatchRepository extends Repository<Dispatch> {
     const found = await this.createQueryBuilder('dispatch')
       .innerJoinAndSelect('dispatch.medications', 'medication')
       .where('medication.id = :medicationId', { medicationId })
+      .innerJoinAndSelect('dispatch.drone', 'drone')
       .getMany();
     try {
       if (!found) {
@@ -27,6 +28,7 @@ export class DispatchRepository extends Repository<Dispatch> {
     return await this.createQueryBuilder('dispatch')
       .innerJoinAndSelect('dispatch.drone', 'drone')
       .where('drone.serial_number = :droneId', { droneId })
+      .innerJoinAndSelect('dispatch.medications', 'medication')
       .getMany();
   }
 

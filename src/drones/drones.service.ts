@@ -1,18 +1,25 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateDroneDto } from './dto/create-drone.dto';
 import { UpdateDroneDto } from './dto/update-drone.dto';
 import { Drone } from './entities/drone.entity';
 import { DroneRepository } from './repositories/drone.repository';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class DronesService {
+  private readonly logger = new Logger(DronesService.name);
   constructor(
     @InjectRepository(DroneRepository)
     private droneRepository: DroneRepository,
   ) {}
   createDrone(createDroneDto: CreateDroneDto) {
     return this.droneRepository.createDrone(createDroneDto);
+  }
+
+  @Cron(CronExpression.EVERY_10_SECONDS)
+  handleCron() {
+    this.logger.log('Cron job executed');
   }
 
   async getAllDrones(): Promise<Drone[]> {

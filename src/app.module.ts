@@ -5,6 +5,7 @@ import { DronesModule } from './drones/drones.module';
 import { MedicationsModule } from './medications/medications.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DispatchModule } from './dispatch/dispatch.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DispatchModule } from './dispatch/dispatch.module';
       synchronize: true,
     }),
     DispatchModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
