@@ -1,19 +1,22 @@
+import { DispatchHistoryRepository } from './../dispatch-history/repositories/dispatch-history.repository';
 import { UpdateDroneDto } from './../drones/dto/update-drone.dto';
 import { Drone } from './../drones/entities/drone.entity';
 import { DroneRepository } from './../drones/repositories/drone.repository';
 import { Medication } from './../medications/entities/medication.entity';
 import { MedicationRepository } from './../medications/repositories/medication.repository';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateDispatchDto } from './dto/create-dispatch.dto';
 import { UpdateDispatchDto } from './dto/update-dispatch.dto';
 import { Dispatch } from './entities/dispatch.entity';
-import { DispatchRepository } from './repository/dispatch.repository';
+import { DispatchRepository } from './repositories/dispatch.repository';
 import { In } from 'typeorm';
-import { State } from 'src/drones/enums';
+import { State } from '../drones/enums';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class DispatchService {
+  private readonly logger = new Logger(DispatchService.name);
   constructor(
     @InjectRepository(DispatchRepository)
     private dispatchRepository: DispatchRepository,
@@ -21,6 +24,8 @@ export class DispatchService {
     private medicationRepository: MedicationRepository,
     @InjectRepository(DroneRepository)
     private droneRepository: DroneRepository,
+    @InjectRepository(DispatchHistoryRepository)
+    private dispatchHistoryRepository: DispatchHistoryRepository,
   ) {}
 
   async findByMedicationId(medicationId: string): Promise<Dispatch[]> {
@@ -43,6 +48,20 @@ export class DispatchService {
     } catch (error) {
       throw new NotFoundException(error.message);
     }
+  }
+
+  @Cron(CronExpression.EVERY_5_SECONDS)
+  async resetDroneState(): Promise<any> {
+    const drones = await this.dispatchRepository.find({
+      relations: ['drone'],
+    });
+    drones.forEach(async (drone) => {
+      if (drone.drone.state === State.DELIVERED) {
+        drone.drone.state = State.IDLE;
+        this.deleteDispatch(drone.id);
+      }
+    });
+    console.log('reset drones with state delivered');
   }
 
   async getMedicationByIds(ids: Array<string>): Promise<Medication[]> {
@@ -222,6 +241,7 @@ export class DispatchService {
 
   async deleteDispatch(id: string): Promise<void> {
     const found = await this.getDispatchById(id);
+    this.dispatchHistoryRepository.save(found);
     const result = await this.dispatchRepository.delete(found.id);
     if (result.affected === 0) {
       throw new NotFoundException(`Dispatch with id ${id} not found`);

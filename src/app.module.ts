@@ -6,6 +6,7 @@ import { MedicationsModule } from './medications/medications.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DispatchModule } from './dispatch/dispatch.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { DispatchHistoryModule } from './dispatch-history/dispatch-history.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     DispatchModule,
     ScheduleModule.forRoot(),
+    DispatchHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

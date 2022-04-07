@@ -5,7 +5,6 @@ import { UpdateDroneDto } from './dto/update-drone.dto';
 import { Drone } from './entities/drone.entity';
 import { DroneRepository } from './repositories/drone.repository';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import fs from 'fs';
 
 @Injectable()
 export class DronesService {

@@ -1,5 +1,4 @@
 import { UpdateDroneDto } from './../drones/dto/update-drone.dto';
-import { State } from './../drones/enums';
 import { Dispatch } from 'src/dispatch/entities/dispatch.entity';
 import {
   Controller,
@@ -45,7 +44,7 @@ export class DispatchController {
     return await this.dispatchService.getDispatchById(id);
   }
 
-  @Patch(':id/dronestate')
+  @Patch('/dronestate/:id')
   async updateDroneStateWithDispatchId(
     @Param('id') id: string,
     @Body() updateDroneDto: UpdateDroneDto,

@@ -1,4 +1,3 @@
-import { NotFoundException } from '@nestjs/common';
 import { CreateDroneDto } from './../dto/create-drone.dto';
 import { EntityRepository, Repository } from 'typeorm';
 import { Drone } from '../entities/drone.entity';
