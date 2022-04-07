@@ -21,9 +21,6 @@ export class MedicationRepository extends Repository<Medication> {
   async getAllMedications(): Promise<Medication[]> {
     return await this.find();
   }
-  async deleteMedicationById(id: string): Promise<void> {
-    await this.softDelete(id);
-  }
 
   async getMedicationById(id: string): Promise<Medication> {
     let found: Medication | PromiseLike<Medication>;

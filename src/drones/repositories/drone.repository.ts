@@ -21,11 +21,4 @@ export class DroneRepository extends Repository<Drone> {
   async getAllDrones(): Promise<Drone[]> {
     return this.find();
   }
-
-  async deleteDrone(id: string): Promise<void> {
-    const deleteRespone = await this.softDelete(id);
-    if (!deleteRespone.affected) {
-      throw new NotFoundException(`Drone with id ${id} not found`);
-    }
-  }
 }

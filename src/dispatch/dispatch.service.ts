@@ -152,7 +152,7 @@ export class DispatchService {
     );
 
     await this.droneRepository.save(updateDoneState);
-
+    dispatch.drone = updateDoneState;
     try {
       await this.dispatchRepository.save(dispatch);
       return dispatch;

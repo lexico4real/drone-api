@@ -1,5 +1,3 @@
-import { Medication } from './../../medications/entities/medication.entity';
-import { CreateDispatchDto } from './../dto/create-dispatch.dto';
 import { EntityRepository, Repository } from 'typeorm';
 import { Dispatch } from '../entities/dispatch.entity';
 import { NotFoundException } from '@nestjs/common';
@@ -30,9 +28,5 @@ export class DispatchRepository extends Repository<Dispatch> {
       .where('drone.serialNumber = :droneId', { droneId })
       .innerJoinAndSelect('dispatch.medications', 'medication')
       .getMany();
-  }
-
-  async deleteDispatch(id: string): Promise<void> {
-    await this.softDelete(id);
   }
 }
