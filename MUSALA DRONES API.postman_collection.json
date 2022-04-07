@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "9f2547c0-cb1d-41e8-946b-e1acb3c49a18",
+		"name": "MUSALA DRONES API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DRONES",
+			"item": [
+				{
+					"name": "GET ALL DRONES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/drones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE A DRONE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"HEAVY_WEIGHT\",\n    \"batteryCapacity\": 69,\n    \"weightLimit\": 495\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/drones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE DRONE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"MIDDLE_WEIGHT\",\n    \"battery_capacity\": 88,\n    \"weight_limit\": 123,\n    \"state\": \"LOADED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/drones/ddef23be-c39f-47c7-ba35-e0d81fd9d53d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones",
+								"ddef23be-c39f-47c7-ba35-e0d81fd9d53d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND DRONE BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/drones/9ffac53d-fa4b-42f7-8358-1fffa1b2a6d1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones",
+								"9ffac53d-fa4b-42f7-8358-1fffa1b2a6d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE A DRONE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/drones/3849da99-7c2d-42b4-acc5-aa1ea53cfcdc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"drones",
+								"3849da99-7c2d-42b4-acc5-aa1ea53cfcdc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MEDICATIONS",
+			"item": [
+				{
+					"name": "CREATE MEDICATION",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Medication_4\",\n    \"weight\": 91,\n    \"code\": \"HSHR\",\n    \"image\": \"https://ichef.bbci.co.uk/news/1024/branded_news/B71C/production/_123167864_gettyimages-1022216070.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/medications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL MEDICATIONS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/medications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET MEDICATION BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/medications/711e1398-36f4-4663-9683-3248a61a867a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications",
+								"711e1398-36f4-4663-9683-3248a61a867a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE MEDICATION",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/medications/4295017b-aee4-46e2-9ce4-cc2e02c49447",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications",
+								"4295017b-aee4-46e2-9ce4-cc2e02c49447"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE MEDICATION",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Medication 1\",\n    \"weight\": 433,\n    \"code\": \"hdbc-\",\n    \"image\": \"some_url\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/medications/9d055b31-8ef7-493d-952a-6c86bc65f546",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"medications",
+								"9d055b31-8ef7-493d-952a-6c86bc65f546"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DISPATCHES",
+			"item": [
+				{
+					"name": "GET ALL DISPATCHES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE A DISPATCH",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"drone\": \"154a7901-531c-4a97-9e76-a4cecc703e9d\",\n    \"medications\": [\"5296a051-4376-4ead-80ec-dd3e0a5a82af\", \"9512b02d-967a-40cb-8019-3392ceb54a7d\"],\n    \"description\": \"Some description\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE A DISPATCH",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"drone\": \"022112b0-8eee-4b92-9ebc-888f96942fe6\",\n    \"medications\": [\"a2b70f29-acab-4e93-b71e-cdc76b018e38\", \"ffb9f267-0c3f-46c1-ae47-770eb2e727d0\"],\n    \"description\": \"Some description some description\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch/961d2fc9-1305-4bf4-9c34-87d8e92310ed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch",
+								"961d2fc9-1305-4bf4-9c34-87d8e92310ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET DISPATCH BY MEDICATION ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch/withmedication/ffb9f267-0c3f-46c1-ae47-770eb2e727d0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch",
+								"withmedication",
+								"ffb9f267-0c3f-46c1-ae47-770eb2e727d0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET DISPATCH BY DRONE ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch/withdrone/022112b0-8eee-4b92-9ebc-888f96942fe6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch",
+								"withdrone",
+								"022112b0-8eee-4b92-9ebc-888f96942fe6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET DISPATCH BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch/961d2fc9-1305-4bf4-9c34-87d8e92310ed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch",
+								"961d2fc9-1305-4bf4-9c34-87d8e92310ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE A DISPATCH",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch/659b3895-0f88-4c71-b009-85d8de185462",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch",
+								"659b3895-0f88-4c71-b009-85d8de185462"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE DRONE STATE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"state\": \"DELIVERED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/dispatch/dronestate/8a2b6b38-3581-456f-94bf-91c812ab5a5b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"dispatch",
+								"dronestate",
+								"8a2b6b38-3581-456f-94bf-91c812ab5a5b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
