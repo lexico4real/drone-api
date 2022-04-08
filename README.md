@@ -48,14 +48,8 @@ $ npm run start:prod
 ## Test
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+You can test this using using postman (https://www.postman.com)
+You can also use swegger to test: (http://localhost:3000/api/)
 ```
 
 ## Support
